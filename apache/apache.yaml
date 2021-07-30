@@ -1,0 +1,17 @@
+- hosts: 192.168.200.66
+  vars: 
+    port: 11000
+  tasks:
+  - name: Install apache2
+    apt:
+      update_cache: yes
+      name: apache2
+      state: present
+  - name: Setting apache2  
+    template: 
+      src: ports.conf.j2
+      dest: /etc/apache2/ports.conf 
+  - name: Reload apache2
+    service: 
+      name: apache2
+      state: reloaded 
